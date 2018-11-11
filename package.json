@@ -3,14 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "koa": "^2.6.2",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.6",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "server": "node server/app.js 3011",
+    "devS": "nodemon server/app.js 3011",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
