@@ -44,7 +44,9 @@ router.get('/index', async ( ctx )=>{
   router.post('/users', async ( ctx )=>{
     ctx.body = 'post-->'
   })
-  
+  router.post('/formDataSumit', async ( ctx )=>{
+    ctx.body = 'formDataSumit-->'
+  })
 app
 .use(router.routes())
 .use(router.allowedMethods({throw: true}));

@@ -3,14 +3,72 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+- npm run start ---> start frontEnd project
+>Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- npm run devS ---> start server project
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## CORS
+### 一个 CORS 预检请求是用于检查服务器是否支持 CORS 即跨域资源共享。
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- 它一般是用了以下几个 HTTP 请求首部的 OPTIONS 请求
+>Access-Control-Request-Method 和 Access-Control-Request-Headers，以及一个 Origin 首部。
+- 当有必要的时候，浏览器会自动发出一个预检请求；所以在正常情况下，前端开发者不需要自己去发这样的请求。
+
+- request headers
+```javascript
+OPTIONS /resource/foo 
+Access-Control-Request-Method: DELETE 
+Access-Control-Request-Headers: origin, x-requested-with
+Origin: https://foo.bar.org
+```
+
+- reponse headers
+```javascript
+HTTP/1.1 200 OK
+Content-Length: 0
+Connection: keep-alive
+Access-Control-Allow-Origin: https://foo.bar.org
+Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE
+Access-Control-Max-Age: 86400
+```
+
+## preflight request
+### 简单请求不会触发预检请求
+- 使用下列方法之一：
+1、GET
+2、HEAD
+3、POST
+
+- Content-Type 的值仅限于下列三者之一：
+1、text/plain
+2、multipart/form-data
+3、application/x-www-form-urlencoded
+
+
+
+### 复杂请求触发预检请求
+- 使用了下面任一 HTTP 方法：
+1、PUT
+2、DELETE
+3、CONNECT
+4、OPTIONS
+5、TRACE
+6、PATCH
+- Content-Type 的值不属于下列之一:（application/json）
+1、application/x-www-form-urlencoded
+2、multipart/form-data
+3、text/plain
+- 请求中的XMLHttpRequestUpload 对象注册了任意多个事件监听器。
+- 请求中使用了ReadableStream对象。
+
+
+
+
+## 附带身份凭证的请求
+- 客户端设置withCredentials = true
+- 服务端的ACAO（access-control-allow-origin）字段不能是通配符 *，必须和request header的origin字段值相同(but only one is allowed)
+- 服务器设置response header -->Access-Control-Allow-Credentials: true
 
 ### `npm test`
 
